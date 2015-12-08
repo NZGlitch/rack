@@ -57,6 +57,12 @@ module Rack
           @content_length = @content_length.to_i
           @content_length -= @boundary_size
         end
+
+        logger.warn @boundary.inspect
+        logger.warn @params.inspect
+        logger.warn @boundary_size.inspect
+        logger.warn @io.inspect
+
         true
       end
 
@@ -70,6 +76,7 @@ module Rack
 
       def fast_forward_to_first_boundary
         loop do
+          logger.warn @io.inspect
           content = @io.read(BUFSIZE)
           raise EOFError, "bad content body" unless content
           @buf << content
