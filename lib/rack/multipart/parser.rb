@@ -7,6 +7,8 @@ module Rack
 
       def initialize(env)
         @env = env
+        puts "Request @env:"
+        Rails.logger.warn @env.inspect
       end
 
       def parse
